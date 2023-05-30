@@ -1,0 +1,30 @@
+.modal-content {
+    border-radius: 10px;
+}
+
+.modal-header {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.modal-title {
+    width: 100%;
+    text-align: center;
+}
+
+button.close {
+    border: none;
+    outline: none;
+    width: 28px;
+    background-color: transparent;
+
+    span {
+        font-size: 26px;
+        font-weight: 600;
+        color: #fff;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}

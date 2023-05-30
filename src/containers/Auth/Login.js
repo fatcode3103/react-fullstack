@@ -6,18 +6,48 @@ import './Login.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
+import { handleLoginApi } from '../../services/userService';
 
-const Login = () => {
+const Login = ({ userLoginSuccess }) => {
     const [userName, setUserName] = useState('');
     const [password, setPassword] = useState('');
     const [showPass, setShowPass] = useState(false);
+    const [errMessage, setErrMessage] = useState('');
 
-    const handleLogin = () => {
-        console.log(`user name: ${userName} | password: ${password}`);
+    /// login
+    const handleLogin = async () => {
+        setErrMessage('');
+        try {
+            let res = await handleLoginApi(userName, password);
+            if (res.data && res.data.errorCode !== 0) {
+                setErrMessage(res.data.errorMessage);
+            }
+            if (res.data && res.data.errorCode === 0) {
+                let data = res.data.user;
+                userLoginSuccess(data);
+            }
+        } catch (e) {
+            if (e.response) {
+                if (e.response.data) {
+                    setErrMessage(e.response.data.errorMessage);
+                }
+            }
+        }
     };
 
+    /// input
     const handlePassword = () => {
         setShowPass(!showPass);
+    };
+
+    const handleUserNameChange = (e) => {
+        setUserName(e.target.value);
+        setErrMessage('');
+    };
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+        setErrMessage('');
     };
 
     return (
@@ -32,7 +62,7 @@ const Login = () => {
                             className="form-control"
                             placeholder="Enter your username"
                             value={userName}
-                            onChange={(e) => setUserName(e.target.value)}
+                            onChange={(e) => handleUserNameChange(e)}
                         />
                     </div>
                     <div className="col-12 form-group login-input">
@@ -43,7 +73,7 @@ const Login = () => {
                                 className="form-control"
                                 placeholder="Enter your password"
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={(e) => handlePasswordChange(e)}
                             />
                             <span className="custom-pass" onClick={() => handlePassword()}>
                                 {showPass ? (
@@ -53,6 +83,9 @@ const Login = () => {
                                 )}
                             </span>
                         </div>
+                    </div>
+                    <div className="col-12" style={{ color: '#ff1313' }}>
+                        {errMessage}
                     </div>
                     <button className="btn-login" onClick={() => handleLogin()}>
                         Login
@@ -87,8 +120,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         navigate: (path) => dispatch(push(path)),
-        adminLoginSuccess: (adminInfo) => dispatch(actions.adminLoginSuccess(adminInfo)),
-        adminLoginFail: () => dispatch(actions.adminLoginFail()),
+        userLoginFail: () => dispatch(actions.userLoginFail()),
+        userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo)),
     };
 };
 

@@ -5,6 +5,8 @@ import * as actions from '../../store/actions';
 import Navigator from '../../components/Navigator';
 import { adminMenu } from './menuApp';
 import './Header.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignOut } from '@fortawesome/free-solid-svg-icons';
 
 class Header extends Component {
     render() {
@@ -19,7 +21,7 @@ class Header extends Component {
 
                 {/* nút logout */}
                 <div className="btn btn-logout" onClick={processLogout}>
-                    <i className="fas fa-sign-out-alt"></i>
+                    <FontAwesomeIcon icon={faSignOut} />
                 </div>
             </div>
         );
@@ -28,7 +30,7 @@ class Header extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        isLoggedIn: state.admin.isLoggedIn,
+        isLoggedIn: state.user.isLoggedIn,
     };
 };
 
