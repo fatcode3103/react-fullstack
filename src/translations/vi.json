@@ -1,4 +1,30 @@
 {
+    "home-header": {
+        "speciality": "Chuyên khoa",
+        "search-doctor": "Tìm bác sĩ theo chuyên khoa",
+        "medical-facility": "Cơ sở y tế",
+        "choose-hospital-clinic": "Chọn bệnh viện phòng khám",
+        "doctor": "Bác sĩ",
+        "good-doctor": "Chọn bác sĩ giỏi",
+        "examination-package": "Gói khám",
+        "general-health-check": "Khám sức khỏe tổng quát",
+        "help": "Trợ giúp"
+    },
+
+    "banner": {
+        "title1": "NỀN TẢNG Y TẾ",
+        "title2": "CHĂM SÓC SỨC KHỎE TOÀN DIỆN",
+        "option1": "Khám chuyên khoa",
+        "option2": "Khám Từ Xa",
+        "option3": "Khám Tổng Quát",
+        "option4": "Xét Nghiệm Y Học",
+        "option5": "Sức Khỏe Tinh Thần",
+        "option6": "Khám Nha Khoa",
+        "option7": "Gói Phẫu Thuật",
+        "option8": "Sản Phẩm Y Tế",
+        "option9": "Bài Test Sức Khỏe"
+    },
+
     "common": {
         "add": "Thêm",
         "edit": "Sửa",
@@ -31,7 +57,7 @@
             "system-administrator": {
                 "header": "Quản trị hệ thống",
                 "user-manage": "Quản lý người sử dụng",
-                "product-manage": "Quản lý gói",
+                "user-redux": "Quản lý người dùng bằng Redux",
                 "register-package-group-or-account": "Đăng ký gói dịch vụ cho nhóm/tài khoản"
             },
             "system-parameter": {

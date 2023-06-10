@@ -9,7 +9,24 @@ html {
     font-family: $fontmain;
     font-size: $base-size - 2px;
     height: 100vh;
-    overflow: hidden;
+}
+
+body {
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        background-color: #d5d5d5;
+        width: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #6c6c6c;
+        border-radius: 3px;
+
+        &:hover {
+            background-color: #333;
+        }
+    }
 }
 
 .btn {

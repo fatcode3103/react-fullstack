@@ -1,4 +1,30 @@
 {
+    "home-header": {
+        "speciality": "Medical speciality",
+        "search-doctor": "Find a doctors by speciality",
+        "medical-facility": "Medical facility",
+        "choose-hospital-clinic": "Choose hospital clinic",
+        "doctor": "Doctor",
+        "good-doctor": "Choose a good doctor",
+        "examination-package": "Examination package",
+        "general-health-check": "General health check",
+        "help": "Help"
+    },
+
+    "banner": {
+        "title1": "MEDICAL BACKGROUND",
+        "title2": "COMPREHENSIVE HEALTH CARE",
+        "option1": "Specialized examination",
+        "option2": "Remote Examination",
+        "option3": "General Examination",
+        "option4": "Medical Tests",
+        "option5": "Mental health",
+        "option6": "Dental Examination",
+        "option7": "Surgery Package",
+        "option8": "Medical Products",
+        "option9": "Health Test"
+    },
+
     "common": {
         "add": "Add",
         "edit": "Edit",
@@ -31,7 +57,7 @@
             "system-administrator": {
                 "header": "System Administrator",
                 "user-manage": "User manage",
-                "product-manage": "Package manage",
+                "user-redux": "Manage user using Redux",
                 "register-package-group-or-account": "Register service package for group/account"
             },
             "system-parameter": {

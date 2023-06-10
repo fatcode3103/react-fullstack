@@ -1,0 +1,296 @@
+//home-header
+.home-page-header-container {
+    top: 0;
+    position: sticky;
+    height: 77px;
+    padding: 10px 0;
+    width: 100%;
+    background-color: white;
+    z-index: 2;
+}
+
+.home-page-header-content {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.left-content {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon-bars {
+    margin-right: 8px;
+    font-size: 30px;
+    color: #8e8e8e;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: #333;
+        cursor: pointer;
+    }
+}
+
+.header-logo {
+    background-image: url('../../assets/images/bookingcare-2020.svg');
+    background-repeat: no-repeat;
+    height: 65%;
+    width: 20%;
+    cursor: pointer;
+}
+
+.center-content {
+    flex: 4;
+    text-align: center;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.child-content {
+    text-align: left;
+    font-size: 12px;
+    height: 100%;
+    cursor: pointer;
+}
+
+.child-content p {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 0;
+}
+
+.child-content span {
+    color: #757575;
+}
+.right-content {
+    flex: 1;
+    text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transform: translateY(15%);
+}
+
+.icon-help {
+    position: relative;
+    background-color: #45c3d2;
+    color: #fff;
+    padding: 3px 5px;
+    border-radius: 50%;
+    font-size: 10px;
+    margin-right: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+}
+
+.right-content span {
+    font-size: 13px;
+    font-weight: 600;
+    color: #a7a7a7;
+    cursor: pointer;
+}
+
+.right-content p {
+    color: #45c3d2;
+    font-weight: 600;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.home-header-banner {
+    background-image: url('../../assets/images/bookingcare-cover-4.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.content-up {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0));
+}
+
+.title1 {
+    padding-top: 60px;
+    text-shadow: 1px 1px #262626;
+    font-size: 32px;
+    color: white;
+}
+
+.title2 {
+    margin: 10px 0 26px 0;
+    text-shadow: 1px 1px #262626;
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+}
+
+.search {
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+}
+
+.icon-search {
+    position: absolute;
+    left: 422px;
+    font-size: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 4px;
+}
+
+.search-box {
+    border-style: none;
+    outline: none;
+    border-radius: 26px;
+    background-color: #f7d800;
+    padding: 10px 46px;
+    width: 456px;
+    height: 50px;
+}
+
+.download {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 60px;
+    gap: 9px;
+}
+
+.google-badge,
+.app-store-badge {
+    width: 100px;
+    opacity: 0.8;
+    transition: all 0.4s ease;
+
+    &:hover {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+.content-down {
+    background-image: linear-gradient(
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 0.9),
+        rgba(255, 255, 255, 1)
+    );
+}
+
+.options {
+    height: 123px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.option-child {
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    width: 50px;
+}
+
+.option-child:hover .text-child {
+    color: #45c3d2;
+    text-shadow: 1px 1px 100px #45c3d2;
+}
+
+.icon-child {
+    padding: 5px;
+    height: 50px;
+    width: 50px;
+    margin: 2px 45px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+.text-child {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+    transition: color 0.4s ease-out;
+    padding: 0px 14px 14px 14px;
+}
+
+// tippy
+.my-language {
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    width: 100px;
+    text-align: center;
+    padding: 8px 0;
+    transform: translate(-45%, 45%);
+
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-width: 14px;
+        border-color: transparent transparent #333 transparent;
+        border-style: solid;
+        top: -20px;
+        left: 58%;
+    }
+}
+
+.language-vi,
+.language-en {
+    cursor: pointer;
+    width: 100%;
+    padding: 2px 0;
+    margin: 0;
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+    &:active {
+        color: #45c3d2;
+    }
+}
+
+.input-language {
+    padding: 0 6px;
+    width: 50px;
+    position: absolute;
+    right: 90px;
+    transform: translateY(-50%);
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+.icon-more {
+    position: absolute;
+    right: 94px;
+    transform: translateY(-50%);
+    background-color: transparent;
+}
+
+.active {
+    color: #45c3d2;
+}
+
+.icon-check {
+    position: absolute;
+    transform: translate(-300%, 25%);
+    color: #45c3d2;
+}

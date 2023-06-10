@@ -8,6 +8,7 @@ import { ToastContainer } from 'react-toastify';
 import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authentication';
 
 import { path } from '../utils';
+import './App.scss';
 
 import Home from '../routes/Home';
 import Login from '../containers/Auth/Login';
@@ -41,9 +42,7 @@ class App extends Component {
             <Fragment>
                 <Router history={history}>
                     <div className="main-container">
-                        {this.props.isLoggedIn && <Header />}
-
-                        <span className="content-container">
+                        <div className="content-container">
                             <Switch>
                                 <Route path={path.HOME} exact component={Home} />
                                 <Route
@@ -53,7 +52,7 @@ class App extends Component {
                                 <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
                                 <Route path={path.HOMEPAGE} component={HomePage} />
                             </Switch>
-                        </span>
+                        </div>
 
                         <ToastContainer
                             className="toast-container"
@@ -77,7 +76,6 @@ class App extends Component {
 const mapStateToProps = (state) => {
     return {
         started: state.app.started,
-        isLoggedIn: state.user.isLoggedIn,
     };
 };
 

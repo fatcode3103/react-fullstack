@@ -1,0 +1,92 @@
+@import '../../styles/common.scss';
+
+.header-container {
+    z-index: 99;
+    display: flex;
+    justify-content: space-between;
+    background-color: $colormain;
+    color: $common-text-color;
+    height: 40px;
+    position: relative;
+    padding-right: 20px;
+
+    .btn-logout {
+        color: $common-text-color;
+        line-height: 40px;
+        height: 40px;
+        padding: 0 10px;
+        &:hover {
+            background-color: darken($colormain, 5);
+        }
+        i {
+            font-size: $base-size + 1px;
+        }
+    }
+}
+
+// tippy
+.my-language {
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    border-radius: 5px;
+    width: 100px;
+    text-align: center;
+    padding: 8px 0;
+
+    &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        border-width: 14px;
+        border-color: transparent transparent #333 transparent;
+        border-style: solid;
+        top: -20px;
+        left: 58%;
+    }
+
+    .language-vi,
+    .language-en {
+        cursor: pointer;
+        width: 100%;
+        padding: 2px 0;
+        margin: 0;
+
+        &:hover {
+            opacity: 0.8;
+        }
+
+        &:active {
+            color: #45c3d2;
+        }
+    }
+}
+
+.input-language {
+    padding: 0 6px;
+    width: 50px;
+    right: 90px;
+    position: absolute;
+    transform: translateY(25%);
+    border-radius: 16px;
+    cursor: pointer;
+}
+
+.icon-more {
+    position: absolute;
+    right: 94px;
+    transform: translateY(90%);
+    background-color: transparent;
+}
+
+.active {
+    color: #45c3d2;
+}
+
+.icon-check {
+    position: absolute;
+    transform: translate(-300%, 25%);
+    color: #45c3d2;
+}
