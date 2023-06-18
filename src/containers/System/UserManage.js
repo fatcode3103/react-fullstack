@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import './UserManage.scss';
 import {
     getAllUsersApi,
@@ -106,11 +107,11 @@ const UserManage = () => {
                 <table className="col-12" id="customers">
                     <thead>
                         <tr>
-                            <th>Email</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Address</th>
-                            <th>Actions</th>
+                            <th><FormattedMessage id="manage-user.email"/></th>
+                            <th><FormattedMessage id="manage-user.first-name"/></th>
+                            <th><FormattedMessage id="manage-user.last-name"/></th>
+                            <th><FormattedMessage id="manage-user.address"/></th>
+                            <th><FormattedMessage id="manage-user.actions"/></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -141,7 +142,7 @@ const UserManage = () => {
                             })
                         ) : (
                             <h4 className="text-center" style={{ color: '#333' }}>
-                                Data Available
+                                Data not available
                             </h4>
                         )}
                     </tbody>
@@ -151,7 +152,7 @@ const UserManage = () => {
                         className="btn btn-primary px-3"
                         onClick={() => setIsOpenModalUser(true)}
                     >
-                        <FontAwesomeIcon icon={faPlus} /> Add new user
+                        <FontAwesomeIcon icon={faPlus} /> <FormattedMessage id="manage-user.add"/>
                     </button>
                 </div>
             </div>

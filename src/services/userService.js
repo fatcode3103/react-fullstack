@@ -33,4 +33,9 @@ const editUserApi = async (data) => {
     return res;
 };
 
-export { handleLoginApi, getAllUsersApi, createNewUserApi, deleteUserApi, editUserApi };
+const getAllCodeApi = (inputType) => {
+    let res = axios.get(`http://localhost:8000/api/allcode?type=${inputType}`)
+    return res
+}
+
+export { handleLoginApi, getAllUsersApi, createNewUserApi, deleteUserApi, editUserApi, getAllCodeApi };

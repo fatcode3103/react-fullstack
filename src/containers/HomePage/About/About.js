@@ -24,9 +24,9 @@ const About = (props) => {
                             height="530"
                             src="https://www.youtube.com/embed/OASGscJQXp0"
                             title="BookingCare: Hệ thống đặt khám trực tuyến"
-                            frameborder="0"
+                            frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                            allowfullscreen
+                            allowFullScreen
                         ></iframe>
                     </div>
                     <div className={cx('content-right col-6')}>
