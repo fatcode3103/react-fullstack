@@ -1,0 +1,31 @@
+.manage-doctor-container {
+    padding: 20px;
+}
+
+.manage-dcotor-title {
+    text-align: center;
+    font-size: 24px;
+    margin: 20px 0;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.manage-doctor-edit{
+
+}
+
+.save-content-doctor{
+    padding: 4px;
+    border: none;
+    background-color: rgb(54, 109, 248);
+    color: #fff;
+    border-radius: 5px;
+    margin-top: 10px;
+
+    &:hover{
+        opacity: 0.9;
+        cursor: pointer;
+    }
+}
+
+

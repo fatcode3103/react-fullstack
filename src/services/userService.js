@@ -33,9 +33,34 @@ const editUserApi = async (data) => {
     return res;
 };
 
-const getAllCodeApi = (inputType) => {
-    let res = axios.get(`http://localhost:8000/api/allcode?type=${inputType}`)
-    return res
-}
+const getAllCodeApi = async (inputType) => {
+    let res = await axios.get(`http://localhost:8000/api/allcode?type=${inputType}`);
+    return res;
+};
 
-export { handleLoginApi, getAllUsersApi, createNewUserApi, deleteUserApi, editUserApi, getAllCodeApi };
+const getTopDoctorApi = async (limit) => {
+    let res = await axios.get(`http://localhost:8000/api/get-top-doctor-home?limit=${limit}`);
+    return res;
+};
+
+const getAllDoctorApi = async () => {
+    let res = await axios.get(`http://localhost:8000/api/get-all-doctor`);
+    return res;
+};
+
+const postInfoDoctorApi = async (infoDoctor) => {
+    let res = await axios.post(`http://localhost:8000/api/post-info-doctor`, infoDoctor);
+    return res;
+};
+
+export {
+    handleLoginApi,
+    getAllUsersApi,
+    createNewUserApi,
+    deleteUserApi,
+    editUserApi,
+    getAllCodeApi,
+    getTopDoctorApi,
+    getAllDoctorApi,
+    postInfoDoctorApi,
+};

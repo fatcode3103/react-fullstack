@@ -12,6 +12,11 @@
         "welcome": "Welcome"
     },
 
+    "home-page": {
+        "top-doctor": "Featured doctor of the week",
+        "more": "See more"
+    },
+
     "banner": {
         "title1": "MEDICAL BACKGROUND",
         "title2": "COMPREHENSIVE HEALTH CARE",
