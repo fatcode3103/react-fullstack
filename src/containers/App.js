@@ -15,6 +15,8 @@ import Login from '../containers/Auth/Login';
 import Header from './Header/Header';
 import System from '../routes/System';
 import HomePage from './HomePage/HomePage';
+import DetailDoctor from './Patient/DetailDoctor/DetailDoctor';
+import Doctor from '../routes/Doctor';
 
 import { CustomToastCloseButton } from '../components/CustomToast';
 
@@ -50,7 +52,9 @@ class App extends Component {
                                     component={userIsNotAuthenticated(Login)}
                                 />
                                 <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
+                                <Route path={path.DOCTOR} component={userIsAuthenticated(Doctor)} />
                                 <Route path={path.HOMEPAGE} component={HomePage} />
+                                <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
                             </Switch>
                         </div>
 

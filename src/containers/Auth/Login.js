@@ -50,6 +50,12 @@ const Login = ({ userLoginSuccess }) => {
         setErrMessage('');
     };
 
+    const handleOnKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleLogin();
+        }
+    };
+
     return (
         <div className="login-background">
             <div className="login-container">
@@ -74,6 +80,7 @@ const Login = ({ userLoginSuccess }) => {
                                 placeholder="Enter your password"
                                 value={password}
                                 onChange={(e) => handlePasswordChange(e)}
+                                onKeyDown={(e) => handleOnKeyDown(e)}
                             />
                             <span className="custom-pass" onClick={() => handlePassword()}>
                                 {showPass ? (

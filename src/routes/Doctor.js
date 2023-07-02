@@ -1,27 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Route, Switch } from 'react-router-dom';
-import UserManage from '../containers/System/UserManage';
-import UserRedux from '../containers/System/Admin/UserRedux';
-import ManageDoctor from '../containers/System/ManageDoctor';
+import ManageSchedule from '../containers/System/ManageSchedule';
 import Header from '../containers/Header/Header';
 
-class System extends Component {
+class Dcotor extends Component {
     render() {
-        const { systemMenuPath, isLoggedIn } = this.props;
+        const { isLoggedIn } = this.props;
         return (
             <>
                 {isLoggedIn && <Header />}
                 <div className="system-container">
                     <div className="system-list">
                         <Switch>
-                            <Route exact path="/system/user-manage" component={UserManage} />
-                            <Route path="/system/user-redux" component={UserRedux} />
-                            <Route path="/system/manage-doctor" component={ManageDoctor} />
                             <Route
-                                component={() => {
-                                    return <Redirect to={systemMenuPath} />;
-                                }}
+                                exact
+                                path="/doctor/manage-schedule"
+                                component={ManageSchedule}
                             />
                         </Switch>
                     </div>
@@ -42,4 +37,4 @@ const mapDispatchToProps = (dispatch) => {
     return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(System);
+export default connect(mapStateToProps, mapDispatchToProps)(Dcotor);

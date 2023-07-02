@@ -1,0 +1,40 @@
+.schedule-select {
+    border-width: 1px;
+    border-style: solid;
+    border-color: transparent transparent #bbbbbb transparent;
+    margin-bottom: 10px;
+    font-size: 15px;
+    color: #337ab7;
+    outline: none;
+}
+
+.schedule-title {
+    margin-bottom: 8px;
+}
+
+.schedule-icon {
+    font-size: 15px;
+    margin-right: 6px;
+}
+
+.schedule-text {
+    font-size: 15px;
+}
+
+// .schedule-option {
+//     text-transform: capitalize;
+// }
+
+.time-btn {
+    min-width: 160px;
+    padding: 10px 20px;
+    background-color: #fff159;
+    border: none;
+    margin: 0 10px 10px 0;
+    transition: all 0.1s ease;
+    border-radius: 3px;
+
+    &:hover {
+        background-color: #45c3d2;
+    }
+}

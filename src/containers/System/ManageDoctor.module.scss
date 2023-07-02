@@ -10,11 +10,10 @@
     font-weight: 600;
 }
 
-.manage-doctor-edit{
-
+.manage-doctor-edit {
 }
 
-.save-content-doctor{
+.save-content-doctor {
     padding: 4px;
     border: none;
     background-color: rgb(54, 109, 248);
@@ -22,10 +21,22 @@
     border-radius: 5px;
     margin-top: 10px;
 
-    &:hover{
+    &:hover {
         opacity: 0.9;
         cursor: pointer;
     }
 }
 
+.update-content-doctor {
+    padding: 4px;
+    border: none;
+    background-color: rgb(232, 145, 22);
+    color: #333;
+    border-radius: 5px;
+    margin-top: 10px;
 
+    &:hover {
+        opacity: 0.9;
+        cursor: pointer;
+    }
+}

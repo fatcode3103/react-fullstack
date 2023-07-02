@@ -8,6 +8,11 @@ import {
     getTopDoctorApi,
     getAllDoctorApi,
     postInfoDoctorApi,
+    getDetailDcotorByIdApi,
+    updateDetailDoctorApi,
+    getAllCodeHoursApi,
+    postBulkCreateSchedule,
+    getScheduleDoctorByDate,
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 
@@ -330,5 +335,203 @@ export const saveInfoDoctorSuccess = () => {
 export const saveInfoDoctorFailed = () => {
     return {
         type: actionTypes.POST_INFO_DOCTOR_FAILED,
+    };
+};
+
+// get detail doctor
+export const getDetailDoctorStart = (id) => {
+    return async (dispatch) => {
+        dispatch({ type: actionTypes.GET_DETAIL_DOCTOR_START });
+        try {
+            let res = await getDetailDcotorByIdApi(id);
+            if (res && res.status === 200) {
+                dispatch(getDetailDoctorSuccess(res.data.data));
+            } else {
+                dispatch(getDetailDoctorFailed());
+            }
+        } catch (e) {
+            dispatch(getDetailDoctorFailed());
+            console.log(e);
+        }
+    };
+};
+
+export const getDetailDoctorSuccess = (data) => {
+    return {
+        type: actionTypes.GET_DETAIL_DOCTOR_SUCCESS,
+        payload: data,
+    };
+};
+
+export const getDetailDoctorFailed = () => {
+    return {
+        type: actionTypes.GET_DETAIL_DOCTOR_FAILED,
+    };
+};
+
+// update detail doctor
+export const updateDetailDoctorStart = (data) => {
+    return async (dispatch) => {
+        dispatch({ type: actionTypes.UPDATE_DETAIL_DOCTOR_START });
+        try {
+            let res = await updateDetailDoctorApi(data);
+            if (res && res.status === 200) {
+                dispatch(updateDetailDoctorSuccess());
+            } else {
+                dispatch(updateDetailDoctorFailed());
+            }
+        } catch (e) {
+            dispatch(updateDetailDoctorFailed());
+            console.log(e);
+        }
+    };
+};
+
+export const updateDetailDoctorSuccess = () => {
+    return {
+        type: actionTypes.UPDATE_DETAIL_DOCTOR_SUCCESS,
+    };
+};
+
+export const updateDetailDoctorFailed = () => {
+    return {
+        type: actionTypes.UPDATE_DETAIL_DOCTOR_FAILED,
+    };
+};
+
+// fetch allcode hours
+export const fetchAllCodeHoursStart = () => {
+    return async (dispatch) => {
+        dispatch({ type: actionTypes.FETCH_ALLCODE_SCHEDULE_HOURS_START });
+        try {
+            let res = await getAllCodeHoursApi('TIME');
+            if (res && res.status === 200) {
+                dispatch(fetchAllCodeHoursSuccess(res.data.data));
+            } else {
+                dispatch(fetchAllCodeHoursFailed());
+            }
+        } catch (e) {
+            dispatch(fetchAllCodeHoursFailed());
+            console.log(e);
+        }
+    };
+};
+
+export const fetchAllCodeHoursSuccess = (data) => {
+    return {
+        type: actionTypes.FETCH_ALLCODE_SCHEDULE_HOURS_SUCCESS,
+        payload: data,
+    };
+};
+
+export const fetchAllCodeHoursFailed = () => {
+    return {
+        type: actionTypes.FETCH_ALLCODE_SCHEDULE_HOURS_FAILED,
+    };
+};
+
+// post bulk create schedule
+export const postBulkCreateScheduleStart = (data) => {
+    return async (dispatch) => {
+        dispatch({ type: actionTypes.FETCH_ALLCODE_SCHEDULE_HOURS_START });
+        try {
+            let res = await postBulkCreateSchedule(data);
+            if (res && res.status === 200) {
+                dispatch(postBulkCreateScheduleSuccess());
+            } else {
+                dispatch(postBulkCreateScheduleFailed());
+            }
+        } catch (e) {
+            dispatch(postBulkCreateScheduleFailed());
+            console.log(e);
+        }
+    };
+};
+
+export const postBulkCreateScheduleSuccess = () => {
+    return {
+        type: actionTypes.FETCH_ALLCODE_SCHEDULE_HOURS_SUCCESS,
+    };
+};
+
+export const postBulkCreateScheduleFailed = () => {
+    return {
+        type: actionTypes.FETCH_ALLCODE_SCHEDULE_HOURS_FAILED,
+    };
+};
+
+// post bulk create schedule
+export const fetchScheduleDoctorStart = (id, date) => {
+    return async (dispatch) => {
+        dispatch({ type: actionTypes.FETCH_SCHEDULE_DOCTOR_START });
+        try {
+            let res = await getScheduleDoctorByDate(id, date);
+            if (res && res.status === 200) {
+                dispatch(fetchScheduleDoctorSuccess(res.data.data));
+            } else {
+                dispatch(fetchScheduleDoctorFailed());
+            }
+        } catch (e) {
+            dispatch(fetchScheduleDoctorFailed());
+            console.log(e);
+        }
+    };
+};
+
+export const fetchScheduleDoctorSuccess = (data) => {
+    return {
+        type: actionTypes.FETCH_SCHEDULE_DOCTOR_SUCCESS,
+        payload: data,
+    };
+};
+
+export const fetchScheduleDoctorFailed = () => {
+    return {
+        type: actionTypes.FETCH_SCHEDULE_DOCTOR_FAILED,
+    };
+};
+
+//fetch doctor info
+export const getRequiredDoctorInfoStart = () => {
+    return async (dispatch) => {
+        dispatch({ type: actionTypes.FETCH_REQUIRED_DOCTOR_INFO_START });
+        try {
+            let resPrice = await getAllCodeApi('PRICE');
+            let resPayment = await getAllCodeApi('PAYMENT');
+            let resProvince = await getAllCodeApi('PROVINCE');
+            if (
+                resPrice &&
+                resPrice.status === 200 &&
+                resPayment &&
+                resPayment.status === 200 &&
+                resPayment &&
+                resProvince.status === 200
+            ) {
+                let data = {
+                    resPrice: resPrice.data.data,
+                    resPayment: resPayment.data.data,
+                    resProvince: resProvince.data.data,
+                };
+                dispatch(getRequiredDoctorInfoSuccess(data));
+            } else {
+                dispatch(getRequiredDoctorInfoFailed());
+            }
+        } catch (e) {
+            console.log(e);
+            dispatch(getRequiredDoctorInfoFailed());
+        }
+    };
+};
+
+export const getRequiredDoctorInfoSuccess = (data) => {
+    return {
+        type: actionTypes.FETCH_REQUIRED_DOCTOR_INFO_SUCCESS,
+        payload: data,
+    };
+};
+
+export const getRequiredDoctorInfoFailed = () => {
+    return {
+        type: actionTypes.FETCH_REQUIRED_DOCTOR_INFO_FAILED,
     };
 };

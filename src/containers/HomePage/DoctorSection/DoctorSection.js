@@ -4,6 +4,7 @@ import className from 'classnames/bind';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { NavLink } from 'react-router-dom';
 
 import bootstrap from 'bootstrap';
 import * as actions from '../../../store/actions';
@@ -94,6 +95,10 @@ const DoctorSection = (props) => {
         dispatch(actions.fetchTopDoctorStart());
     }, [dispatch]);
 
+    // const handleViewDetailDoctor = (doctor) => {
+    //     console.log(doctor);
+    // };
+
     return (
         <div style={{ backgroundColor: color }} className={cx('doctor-section-container')}>
             <div className={cx('doctor-section-content')}>
@@ -121,31 +126,40 @@ const DoctorSection = (props) => {
                                 let positonEn = topDoctor.positionData.valueEn;
 
                                 return (
-                                    <div key={index} className={cx('doctor-section-tag')}>
-                                        <div className={cx('doctor-section-img-wrapper')}>
-                                            <div
-                                                className={cx('doctor-section-img')}
-                                                style={{
-                                                    backgroundImage: `url(${imageBase64})`,
-                                                    backgroundRepeat: 'no-repeat',
-                                                    backgroundPosition: 'top',
-                                                }}
-                                            ></div>
+                                    <NavLink
+                                        to={`/detail-doctor/${topDoctor.id}`}
+                                        className={cx('detail-doctor-link')}
+                                    >
+                                        <div
+                                            key={index}
+                                            className={cx('doctor-section-tag')}
+                                            // onClick={() => handleViewDetailDoctor(topDoctor)}
+                                        >
+                                            <div className={cx('doctor-section-img-wrapper')}>
+                                                <div
+                                                    className={cx('doctor-section-img')}
+                                                    style={{
+                                                        backgroundImage: `url(${imageBase64})`,
+                                                        backgroundRepeat: 'no-repeat',
+                                                        backgroundPosition: 'top',
+                                                    }}
+                                                ></div>
+                                            </div>
+                                            <p className={cx('doctor-section-description')}>
+                                                <p>{language === 'vi' ? positonVi : positonEn}</p>
+                                                {language === 'vi' ? (
+                                                    <p>
+                                                        {topDoctor.lastName} {topDoctor.firstName}
+                                                    </p>
+                                                ) : (
+                                                    <p>
+                                                        {topDoctor.firstName} {topDoctor.lastName}
+                                                    </p>
+                                                )}
+                                                <p>Cơ xương khớp</p>
+                                            </p>
                                         </div>
-                                        <p className={cx('doctor-section-description')}>
-                                            <p>{language === 'vi' ? positonVi : positonEn}</p>
-                                            {language === 'vi' ? (
-                                                <p>
-                                                    {topDoctor.lastName} {topDoctor.firstName}
-                                                </p>
-                                            ) : (
-                                                <p>
-                                                    {topDoctor.firstName} {topDoctor.lastName}
-                                                </p>
-                                            )}
-                                            <p>Cơ xương khớp</p>
-                                        </p>
-                                    </div>
+                                    </NavLink>
                                 );
                             })}
                     </Slider>

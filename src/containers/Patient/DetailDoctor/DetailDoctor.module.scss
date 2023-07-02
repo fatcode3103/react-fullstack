@@ -1,0 +1,59 @@
+.detail-doctor-container {
+    height: 100vh;
+}
+
+.detail-doctor-content {
+    height: 100vh;
+    padding: 20px 0;
+}
+
+.block-1 {
+    border-bottom: 1px solid #ddd;
+    background-color: #fff !important;
+    padding: 10px 200px;
+}
+
+//info
+.info-doctor {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+
+.brief-info {
+    margin-left: 16px;
+}
+
+.main-info {
+    font-size: 30px;
+    font-weight: 600;
+}
+
+.secondary-info {
+    font-size: 14px;
+    width: 600px;
+}
+
+.avatar-doctor img {
+    margin: 6px 6px 6px 0;
+    border-radius: 50%;
+    width: 120px;
+}
+
+//schedule
+.schedule-doctor {
+    height: 500px;
+    border: 1px solid red !important;
+}
+
+//detail
+.detail-info-doctor {
+    border-bottom: 1px solid #ddd;
+    height: max-content;
+    background-color: #f9f9f9;
+    padding: 10px 200px;
+}
+
+//feedback
+.patient-feedback {
+}

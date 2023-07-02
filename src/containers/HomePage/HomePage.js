@@ -17,7 +17,7 @@ import {
 const HomePage = () => {
     return (
         <div>
-            <HomePageHeader />
+            <HomePageHeader isShowBanner={true} />
             <Section data={specialityData} />
             <Section data={telemedicineData} backgroundStyle="#f5f5f5" />
             <Section data={healthFacilities} />

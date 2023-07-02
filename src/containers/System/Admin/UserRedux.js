@@ -136,7 +136,6 @@ const UserRedux = () => {
                     image: form.avatar,
                 }),
             );
-            console.log('check data: >>> : ', form);
         } else {
             // update action
             await dispatch(

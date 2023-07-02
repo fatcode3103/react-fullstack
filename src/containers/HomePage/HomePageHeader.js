@@ -17,15 +17,22 @@ import googleImage from '../../assets/images/google-play-badge.svg';
 import appStoreImage from '../../assets/images/app-store-badge-black.svg';
 import { languages } from '../../utils/constant';
 import { changeLanguage } from '../../store/actions';
+import { useHistory } from 'react-router-dom';
 
 const cx = className.bind(styles);
 
 const HomePageHeader = (props) => {
+    let history = useHistory();
+
     const handleChangeLanguage = (language) => {
         props.changeLanguage(language);
     };
 
-    const language = props.language;
+    const { language, isShowBanner } = props;
+
+    const returnToHome = () => {
+        return history.push('/home');
+    };
 
     return (
         <>
@@ -33,7 +40,7 @@ const HomePageHeader = (props) => {
                 <div className={cx('home-page-header-content')}>
                     <div className={cx('left-content')}>
                         <FontAwesomeIcon icon={faBars} className={cx('icon-bars')} />
-                        <div className={cx('header-logo')}>
+                        <div className={cx('header-logo')} onClick={() => returnToHome()}>
                             <div />
                         </div>
                         <div className={cx('center-content')}>
@@ -138,70 +145,74 @@ const HomePageHeader = (props) => {
                     </div>
                 </div>
             </div>
-            <div className={cx('home-header-banner')}>
-                <div className={cx('content-up')}>
-                    <div className={cx('title1')}>
-                        <FormattedMessage id="banner.title1" />
-                    </div>
-                    <div className={cx('title2')}>
-                        <FormattedMessage id="banner.title2" />
-                    </div>
-                    <div className={cx('search')}>
-                        <FontAwesomeIcon icon={faSearch} className={cx('icon-search')} />
-                        <input
-                            type="text"
-                            className={cx('search-box')}
-                            placeholder="Enter something..."
-                        />
-                    </div>
-                    <div className={cx('download')}>
-                        <a
-                            href="https://play.google.com/store/apps/details?id=vn.bookingcare.bookingcare&hl=en_US"
-                            target="_blank"
-                            rel="noreferrer"
-                        >
-                            <img
-                                src={googleImage}
-                                alt="google play"
-                                className={cx('google-badge')}
+            {isShowBanner === true && (
+                <div className={cx('home-header-banner')}>
+                    <div className={cx('content-up')}>
+                        <div className={cx('title1')}>
+                            <FormattedMessage id="banner.title1" />
+                        </div>
+                        <div className={cx('title2')}>
+                            <FormattedMessage id="banner.title2" />
+                        </div>
+                        <div className={cx('search')}>
+                            <FontAwesomeIcon icon={faSearch} className={cx('icon-search')} />
+                            <input
+                                type="text"
+                                className={cx('search-box')}
+                                placeholder="Enter something..."
                             />
-                        </a>
-                        <a
-                            href="https://apps.apple.com/vn/app/bookingcare/id1347700144"
-                            target="_blank"
-                            rel="noreferrer"
-                        >
-                            <img
-                                src={appStoreImage}
-                                alt="app store"
-                                className={cx('app-store-badge')}
-                            />
-                        </a>
+                        </div>
+                        <div className={cx('download')}>
+                            <a
+                                href="https://play.google.com/store/apps/details?id=vn.bookingcare.bookingcare&hl=en_US"
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <img
+                                    src={googleImage}
+                                    alt="google play"
+                                    className={cx('google-badge')}
+                                />
+                            </a>
+                            <a
+                                href="https://apps.apple.com/vn/app/bookingcare/id1347700144"
+                                target="_blank"
+                                rel="noreferrer"
+                            >
+                                <img
+                                    src={appStoreImage}
+                                    alt="app store"
+                                    className={cx('app-store-badge')}
+                                />
+                            </a>
+                        </div>
                     </div>
-                </div>
-                <div className={cx('content-down')}>
-                    <div className={cx('options')}>
-                        {options.map((option, index) => {
-                            return (
-                                <a href="/" className={cx('option-child')} key={index}>
-                                    <div>
+                    <div className={cx('content-down')}>
+                        <div className={cx('options')}>
+                            {options.map((option, index) => {
+                                return (
+                                    <a href="/" className={cx('option-child')} key={index}>
                                         <div>
-                                            <img
-                                                src={option.img}
-                                                alt=""
-                                                className={cx('icon-child')}
-                                            />
+                                            <div>
+                                                <img
+                                                    src={option.img}
+                                                    alt=""
+                                                    className={cx('icon-child')}
+                                                />
+                                            </div>
+                                            <div className={cx('text-child')}>
+                                                <FormattedMessage
+                                                    id={`banner.option${index + 1}`}
+                                                />
+                                            </div>
                                         </div>
-                                        <div className={cx('text-child')}>
-                                            <FormattedMessage id={`banner.option${index + 1}`} />
-                                        </div>
-                                    </div>
-                                </a>
-                            );
-                        })}
+                                    </a>
+                                );
+                            })}
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
         </>
     );
 };

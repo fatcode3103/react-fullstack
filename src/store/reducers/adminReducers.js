@@ -8,6 +8,10 @@ const initialState = {
     users: [],
     topDoctors: [],
     allDoctors: [],
+    detailDoctor: {},
+    hoursAllCode: [],
+    scheduleDoctor: [],
+    allRequiredDoctorInfo: [],
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -97,7 +101,7 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...coppyTopDoctorState,
             };
-        case actionTypes.FGET_TOP_DOCTOR_FAILED:
+        case actionTypes.GET_TOP_DOCTOR_FAILED:
             state.isLoading = false;
             return {
                 ...state,
@@ -115,7 +119,79 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...coppyAllDoctorState,
             };
-        case actionTypes.FGET_ALL_DOCTOR_FAILED:
+        case actionTypes.GET_ALL_DOCTOR_FAILED:
+            state.isLoading = false;
+            return {
+                ...state,
+            };
+        //get detail doctor
+        case actionTypes.GET_DETAIL_DOCTOR_START:
+            state.isLoading = true;
+            return {
+                ...state,
+            };
+        case actionTypes.GET_DETAIL_DOCTOR_SUCCESS:
+            let coppyDetailDoctorState = { ...state };
+            coppyDetailDoctorState.isLoading = false;
+            coppyDetailDoctorState.detailDoctor = action.payload;
+            return {
+                ...coppyDetailDoctorState,
+            };
+        case actionTypes.GET_DETAIL_DOCTOR_FAILED:
+            state.isLoading = false;
+            return {
+                ...state,
+            };
+        //get allcode hours
+        case actionTypes.FETCH_ALLCODE_SCHEDULE_HOURS_START:
+            state.isLoading = true;
+            return {
+                ...state,
+            };
+        case actionTypes.FETCH_ALLCODE_SCHEDULE_HOURS_SUCCESS:
+            let coppyHoursAllCodeState = { ...state };
+            coppyHoursAllCodeState.isLoading = false;
+            coppyHoursAllCodeState.hoursAllCode = action.payload;
+            return {
+                ...coppyHoursAllCodeState,
+            };
+        case actionTypes.FETCH_ALLCODE_SCHEDULE_HOURS_FAILED:
+            state.isLoading = false;
+            return {
+                ...state,
+            };
+        //get schedule doctor
+        case actionTypes.FETCH_SCHEDULE_DOCTOR_START:
+            state.isLoading = true;
+            return {
+                ...state,
+            };
+        case actionTypes.FETCH_SCHEDULE_DOCTOR_SUCCESS:
+            let coppyScheduleDoctorState = { ...state };
+            coppyScheduleDoctorState.isLoading = false;
+            coppyScheduleDoctorState.scheduleDoctor = action.payload;
+            return {
+                ...coppyScheduleDoctorState,
+            };
+        case actionTypes.FETCH_SCHEDULE_DOCTOR_FAILED:
+            state.isLoading = false;
+            return {
+                ...state,
+            };
+        //get required doctor info
+        case actionTypes.FETCH_REQUIRED_DOCTOR_INFO_START:
+            state.isLoading = true;
+            return {
+                ...state,
+            };
+        case actionTypes.FETCH_REQUIRED_DOCTOR_INFO_SUCCESS:
+            let coppyAllRequiredDoctorInfoState = { ...state };
+            coppyAllRequiredDoctorInfoState.isLoading = false;
+            coppyAllRequiredDoctorInfoState.allRequiredDoctorInfo = action.payload;
+            return {
+                ...coppyAllRequiredDoctorInfoState,
+            };
+        case actionTypes.FETCH_REQUIRED_DOCTOR_INFO_FAILED:
             state.isLoading = false;
             return {
                 ...state,

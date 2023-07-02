@@ -53,6 +53,32 @@ const postInfoDoctorApi = async (infoDoctor) => {
     return res;
 };
 
+const getDetailDcotorByIdApi = async (id) => {
+    let res = await axios.get(`http://localhost:8000/api/get-detail-doctor-by-id?id=${id}`);
+    return res;
+};
+const updateDetailDoctorApi = async (data) => {
+    let res = await axios.put(`http://localhost:8000/api/edit-detail-doctor`, data);
+    return res;
+};
+
+const getAllCodeHoursApi = async (input) => {
+    let res = await axios.get(`http://localhost:8000/api/get-allcode-hours?type=${input}`);
+    return res;
+};
+
+const postBulkCreateSchedule = async (data) => {
+    let res = await axios.post(`http://localhost:8000/api/bulk-create-schedule`, data);
+    return res;
+};
+
+const getScheduleDoctorByDate = async (id, date) => {
+    let res = await axios.get(
+        `http://localhost:8000/api/get-schedule-doctor-by-date?doctorId=${id}&date=${date}`, ///param
+    );
+    return res;
+};
+
 export {
     handleLoginApi,
     getAllUsersApi,
@@ -63,4 +89,9 @@ export {
     getTopDoctorApi,
     getAllDoctorApi,
     postInfoDoctorApi,
+    getDetailDcotorByIdApi,
+    updateDetailDoctorApi,
+    getAllCodeHoursApi,
+    postBulkCreateSchedule,
+    getScheduleDoctorByDate,
 };

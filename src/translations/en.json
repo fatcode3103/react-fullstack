@@ -46,15 +46,18 @@
         "admin": {
             "manage-user": "User manage",
             "manage-doctor": "Doctor manage",
-            "manage-admin": "Admin manage",
             "crud": "CRUD user",
             "crud-redux": "CRUD redux",
             "clinic": "Clinic",
-            "manage-clinic": "Clinic manage",   
+            "manage-clinic": "Clinic manage",
             "specialty": "Specialty",
             "manage-specialty": "Specialty manage",
             "handbook": "Handbook",
             "manage-handbook": "Handbook manage"
+        },
+        "doctor": {
+            "manage-schedule": "Schedule manage",
+            "schedule": "Schedule"
         }
     },
     "manage-user": {
@@ -74,5 +77,26 @@
         "female": "Female",
         "save": "Save",
         "update": "Update"
+    },
+    "manage-schdule": {
+        "title": "Manage doctor's examination plan",
+        "choose-doctor": "Select doctor",
+        "choose-date": "Select date",
+        "save": "Save information"
+    },
+    "patient": {
+        "detaile-doctor": {
+            "schedule": "Schedule",
+            "no-schedule": "No appointment scheduled"
+        }
+    },
+    "admin": {
+        "manage-doctor": {
+            "title": "Create more information for doctor",
+            "choose-doctor": "Select doctor",
+            "introductory-information": "Introductory information",
+            "update-info": "Update",
+            "save-info": "Save"
+        }
     }
 }

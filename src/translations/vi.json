@@ -46,7 +46,6 @@
         "admin": {
             "manage-user": "Người dùng",
             "manage-doctor": "Quản lý bác sĩ",
-            "manage-admin": "Quản lý admin",
             "crud": "CRUD user",
             "crud-redux": "CRUD redux",
             "clinic": "Phòng khám",
@@ -55,6 +54,10 @@
             "manage-specialty": "Quản lý chuyên khoa",
             "handbook": "Bài đăng",
             "manage-handbook": "Quản lý bài đăng"
+        },
+        "doctor": {
+            "manage-schedule": "Quản lý kế hoạch khám bệnh",
+            "schedule": "Lịch khám"
         }
     },
     "manage-user": {
@@ -74,5 +77,26 @@
         "female": "Nữ",
         "save": "Lưu",
         "update": "Cập nhật"
+    },
+    "manage-schdule": {
+        "title": "Quản lý kế hoạch khám bệnh của bác sĩ",
+        "choose-doctor": "Chọn bác sĩ",
+        "choose-date": "Chọn ngày",
+        "save": "Lưu thông tin"
+    },
+    "patient": {
+        "detaile-doctor": {
+            "schedule": "Lịch khám",
+            "no-schedule": "Không có lịch khám"
+        }
+    },
+    "admin": {
+        "manage-doctor": {
+            "title": "Tạo thêm thông tin cho bác sĩ",
+            "choose-doctor": "Chọn bác sĩ",
+            "introductory-information": "Thông tin giới thiệu",
+            "update-info": "Cập nhật thông tin bác sĩ",
+            "save-info": "Lưu thông tin bác sĩ"
+        }
     }
 }
