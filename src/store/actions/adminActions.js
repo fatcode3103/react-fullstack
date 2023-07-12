@@ -13,6 +13,9 @@ import {
     getAllCodeHoursApi,
     postBulkCreateSchedule,
     getScheduleDoctorByDate,
+    getExtraInfoById,
+    postBookAppointment,
+    getAllSpecialtyApi,
 } from '../../services/userService';
 import { toast } from 'react-toastify';
 
@@ -311,7 +314,7 @@ export const saveInfoDoctorStart = (infoDoctor) => {
         dispatch({ type: actionTypes.POST_INFO_DOCTOR_START });
         try {
             let res = await postInfoDoctorApi(infoDoctor);
-            if (res && res.status === 200) {
+            if (res && res.data && res.data.errorCode === 0) {
                 dispatch(saveInfoDoctorSuccess());
                 toast.success('Save information doctor successfully !');
             } else {
@@ -375,13 +378,16 @@ export const updateDetailDoctorStart = (data) => {
         dispatch({ type: actionTypes.UPDATE_DETAIL_DOCTOR_START });
         try {
             let res = await updateDetailDoctorApi(data);
-            if (res && res.status === 200) {
+            if (res && res.data && res.data.errorCode === 0) {
                 dispatch(updateDetailDoctorSuccess());
+                toast.success('update info success');
             } else {
                 dispatch(updateDetailDoctorFailed());
+                toast.error('update info failed');
             }
         } catch (e) {
             dispatch(updateDetailDoctorFailed());
+            toast.error('update info failed');
             console.log(e);
         }
     };
@@ -499,18 +505,22 @@ export const getRequiredDoctorInfoStart = () => {
             let resPrice = await getAllCodeApi('PRICE');
             let resPayment = await getAllCodeApi('PAYMENT');
             let resProvince = await getAllCodeApi('PROVINCE');
+            let resSpecialty = await getAllSpecialtyApi();
             if (
                 resPrice &&
-                resPrice.status === 200 &&
+                resPrice.data.errorCode === 0 &&
                 resPayment &&
-                resPayment.status === 200 &&
+                resPayment.data.errorCode === 0 &&
                 resPayment &&
-                resProvince.status === 200
+                resProvince.data.errorCode === 0 &&
+                resSpecialty &&
+                resSpecialty.data.errorCode === 0
             ) {
                 let data = {
                     resPrice: resPrice.data.data,
                     resPayment: resPayment.data.data,
                     resProvince: resProvince.data.data,
+                    resSpecialty: resSpecialty.data.data,
                 };
                 dispatch(getRequiredDoctorInfoSuccess(data));
             } else {
@@ -533,5 +543,100 @@ export const getRequiredDoctorInfoSuccess = (data) => {
 export const getRequiredDoctorInfoFailed = () => {
     return {
         type: actionTypes.FETCH_REQUIRED_DOCTOR_INFO_FAILED,
+    };
+};
+
+//get extra info doctor by id
+export const getExtraInfoByIdStart = (id) => {
+    return async (dispatch) => {
+        dispatch({ type: actionTypes.GET_EXTRA_INFO_BY_ID_START });
+        try {
+            let response = await getExtraInfoById(id);
+            if (response && response.data && response.data.errorCode === 0) {
+                dispatch(getExtraInfoByIdSuccess(response.data.data));
+            } else {
+                dispatch(getExtraInfoByIdFailed());
+            }
+        } catch (e) {
+            console.log(e);
+            dispatch(getExtraInfoByIdStart());
+        }
+    };
+};
+
+export const getExtraInfoByIdSuccess = (data) => {
+    return {
+        type: actionTypes.GET_EXTRA_INFO_BY_ID_SUCCESS,
+        payload: data,
+    };
+};
+
+export const getExtraInfoByIdFailed = () => {
+    return {
+        type: actionTypes.GET_EXTRA_INFO_BY_ID_FAILED,
+    };
+};
+
+//post book appointment
+export const postBookAppointmentStart = (patientData) => {
+    return async (dispatch) => {
+        dispatch({ type: actionTypes.POST_BOOK_APPOINTMENT_START });
+        try {
+            let response = await postBookAppointment(patientData);
+            if (response && response.data && response.data.errorCode === 0) {
+                dispatch(postBookAppointmentSuccess());
+                toast.success('Save patient info success !');
+            } else {
+                dispatch(postBookAppointmentFailed());
+                toast.error('Save patient info failed !');
+            }
+        } catch (e) {
+            console.log(e);
+            dispatch(postBookAppointmentFailed());
+            toast.error('Save patient info failed !');
+        }
+    };
+};
+
+export const postBookAppointmentSuccess = () => {
+    return {
+        type: actionTypes.POST_BOOK_APPOINTMENT_SUCCESS,
+    };
+};
+
+export const postBookAppointmentFailed = () => {
+    return {
+        type: actionTypes.POST_BOOK_APPOINTMENT_FAILED,
+    };
+};
+
+//get all specialty
+export const getAllSpecialtyStart = () => {
+    return async (dispatch) => {
+        dispatch({ type: actionTypes.GET_ALL_SPECIALTY_START });
+        try {
+            let response = await getAllSpecialtyApi();
+            if (response && response.data && response.data.errorCode === 0) {
+                dispatch(getAllSpecialtySuccess(response.data.data));
+            } else {
+                dispatch(getAllSpecialtyFailed());
+            }
+        } catch (e) {
+            console.log(e);
+            dispatch(getAllSpecialtyFailed());
+        }
+    };
+};
+
+export const getAllSpecialtySuccess = (data) => {
+    return {
+        type: actionTypes.GET_ALL_SPECIALTY_SUCCESS,
+        payload: data,
+    };
+};
+
+export const getAllSpecialtyFailed = () => {
+    return {
+        type: actionTypes.GET_ALL_SPECIALTY_FAILED,
     };
 };

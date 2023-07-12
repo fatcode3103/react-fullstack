@@ -1,0 +1,35 @@
+.manage-specialty-container {
+    padding: 20px;
+}
+
+.manage-specialty-title {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.file-input {
+    border: 1px solid #bbb;
+    padding: 6px;
+    border-radius: 3px;
+    transition: all 0.2s linear;
+
+    &:hover {
+        background-color: rgb(0, 170, 249);
+        border: 1px solid rgb(0, 170, 249);
+        color: #fff;
+        cursor: pointer;
+        opacity: 0.9;
+    }
+}
+
+.preview-img {
+    width: 30px;
+
+    &:hover {
+        cursor: pointer;
+    }
+}

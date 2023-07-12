@@ -79,6 +79,38 @@ const getScheduleDoctorByDate = async (id, date) => {
     return res;
 };
 
+const getExtraInfoById = async (id) => {
+    let res = await axios.get(`http://localhost:8000/api/get-extra-info-by-id?doctorId=${id}`);
+    return res;
+};
+
+const getProfileDoctorById = async (id) => {
+    let res = await axios.get(`http://localhost:8000/api/get-profile-doctor-by-id?doctorId=${id}`);
+    return res;
+};
+// /api/post-book-appointment
+const postBookAppointment = async (data) => {
+    let res = await axios.post(`http://localhost:8000/api/post-book-appointment`, data);
+    return res;
+};
+
+const postVerifyBookAppointment = async (data) => {
+    let res = await axios.post(
+        `http://localhost:8000/api/verify-book-appointment?token=${data.token}&doctorId=${data.doctorId}`,
+    );
+    return res;
+};
+
+const createSpecialty = async (data) => {
+    let res = await axios.post(`http://localhost:8000/api/create-specialty`, data);
+    return res;
+};
+
+const getAllSpecialtyApi = async () => {
+    let res = await axios.get(`http://localhost:8000/api/get-all-specialty`);
+    return res;
+};
+
 export {
     handleLoginApi,
     getAllUsersApi,
@@ -94,4 +126,10 @@ export {
     getAllCodeHoursApi,
     postBulkCreateSchedule,
     getScheduleDoctorByDate,
+    getExtraInfoById,
+    getProfileDoctorById,
+    postBookAppointment,
+    postVerifyBookAppointment,
+    createSpecialty,
+    getAllSpecialtyApi,
 };

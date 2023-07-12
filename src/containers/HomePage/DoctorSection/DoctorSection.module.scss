@@ -82,9 +82,12 @@
 }
 
 .doctor-section-description p {
+    &:hover {
+        text-decoration: none;
+    }
     margin: 0;
 }
 
-.detail-doctor-link{
+.detail-doctor-link {
     text-decoration: none;
 }

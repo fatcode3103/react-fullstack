@@ -20,21 +20,61 @@ function ManageDoctor(props) {
     const [contentMarkdown, setContentMarkdown] = useState('');
     const [contentHTML, setContentHTML] = useState('');
     const [descriptionDoctor, setDescriptionDoctor] = useState('');
-    const [selecteDoctor, setSelectedDoctor] = useState(null);
+    const [selecteDoctor, setSelectedDoctor] = useState({ label: '', value: '' });
     const [allDoctorArr, setAllDoctorArr] = useState([]);
     const [isData, setIsData] = useState(false);
-    const [allRequiredDoctorInfoArr, setAllRequiredDoctorInfoArr] = useState([]);
 
     const [listPrice, setListPrice] = useState([]);
     const [listPayment, setListPayment] = useState([]);
     const [listProvince, setListProvince] = useState([]);
+    const [listClinic, setListClinic] = useState([]);
+    const [listSpecialty, setListSpecialty] = useState([]);
 
-    const [selectedPrice, setSelectedPrice] = useState('');
-    const [selectedPayment, setSelectedPayment] = useState('');
-    const [selectedProvince, setSelectedProvince] = useState('');
-    const [nameClinic, setNameClinic] = useState('');
-    const [addressClinic, setAddressClinic] = useState('');
-    const [not, setNote] = useState('');
+    const useForm = (initialState) => {
+        const [form, setForm] = useState(initialState);
+
+        const handleOnChangeInput = (e, type) => {
+            if (type) {
+                setForm({
+                    ...form,
+                    [type]: e, /// []: su dung gia tri 1 bien lam ten 1 thuoc tinh trong obj
+                });
+            } else {
+                setForm({
+                    ...form,
+                    [e.target.name]: e.target.value, /// []: su dung gia tri 1 bien lam ten 1 thuoc tinh trong obj
+                });
+            }
+        };
+
+        const resetForm = () => {
+            setForm(initialState);
+        };
+
+        return [form, setForm, handleOnChangeInput, resetForm];
+    };
+
+    const [form, setForm, handleOnChangeInput, resetForm] = useForm({
+        selectedPrice: { label: '', value: '' },
+        selectedPayment: { label: '', value: '' },
+        selectedProvince: { label: '', value: '' },
+        nameClinic: '',
+        addressClinic: '',
+        note: '',
+        selectedSpecialty: '',
+        // clinicId: '',
+    });
+
+    const {
+        selectedPrice,
+        selectedPayment,
+        selectedProvince,
+        nameClinic,
+        addressClinic,
+        note,
+        selectedSpecialty,
+        // clinicId,
+    } = form;
 
     const { admin: adminState, app: appState } = useSelector((state) => state);
     const dispatch = useDispatch();
@@ -51,14 +91,15 @@ function ManageDoctor(props) {
         let doctorSelect = buildDataInputSelect(allDoctors, 'USER');
         setAllDoctorArr(doctorSelect);
 
-        setAllRequiredDoctorInfoArr(allRequiredDoctorInfo);
-        let { resPrice, resPayment, resProvince } = allRequiredDoctorInfo;
+        let { resPrice, resPayment, resProvince, resSpecialty } = allRequiredDoctorInfo;
         let priceSelect = buildDataInputSelect(resPrice);
         let paymentSelect = buildDataInputSelect(resPayment);
         let provinceSelect = buildDataInputSelect(resProvince);
+        let specialtySelect = buildDataInputSelect(resSpecialty, 'SPECIALTY');
         setListPrice(priceSelect);
         setListPayment(paymentSelect);
         setListProvince(provinceSelect);
+        setListSpecialty(specialtySelect);
     }, [allDoctors, language, allRequiredDoctorInfo]);
 
     const handleEditorChange = ({ html, text }) => {
@@ -66,57 +107,114 @@ function ManageDoctor(props) {
         setContentHTML(html);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async () => {
         if (!isData) {
             let infoData = {
                 contentMarkdown: contentMarkdown,
                 contentHTML: contentHTML,
                 doctorId: selecteDoctor.value,
                 description: descriptionDoctor,
+                selectedPrice: selectedPrice.value,
+                selectedPayment: selectedPayment.value,
+                selectedProvince: selectedProvince.value,
+                nameClinic: nameClinic,
+                addressClinic: addressClinic,
+                note: note,
+                // clinicId: clinicId,
+                specialtyId: selectedSpecialty.value,
             };
-            dispatch(actions.saveInfoDoctorStart(infoData));
+            await dispatch(actions.saveInfoDoctorStart(infoData));
             setDescriptionDoctor('');
             setContentMarkdown('');
-            setSelectedDoctor(null);
+            setSelectedDoctor({ label: '', value: '' });
             setIsData(false);
+            resetForm();
         } else {
             let infoData = {
                 contentMarkdown: contentMarkdown,
                 contentHTML: contentHTML,
                 doctorId: selecteDoctor.value,
                 description: descriptionDoctor,
+                selectedPrice: selectedPrice.value,
+                selectedPayment: selectedPayment.value,
+                selectedProvince: selectedProvince.value,
+                nameClinic: nameClinic,
+                addressClinic: addressClinic,
+                note: note,
+                // clinicId: clinicId,
+                specialtyId: selectedSpecialty.value,
             };
-            dispatch(actions.updateDetailDoctorStart(infoData));
+            await dispatch(actions.updateDetailDoctorStart(infoData));
             setDescriptionDoctor('');
             setContentMarkdown('');
-            setSelectedDoctor(null);
+            setSelectedDoctor({ label: '', value: '' });
             setIsData(false);
+            resetForm();
         }
     };
 
     const handleChangeSelectDoctor = async (data) => {
+        setDescriptionDoctor('');
+        setContentMarkdown('');
+        setSelectedDoctor({ label: '', value: '' });
+        setIsData(false);
+        resetForm();
         setSelectedDoctor(data);
         let res = await getDetailDcotorByIdApi(data.value);
-        let { Markdown } = res.data.data;
+
+        console.log('on change data doctor:>>>', res);
+        let { Markdown, Doctor_Info } = res.data.data;
+        let {
+            priceIdData,
+            paymentIdData,
+            provinceIdData,
+            nameClinic,
+            addressClinic,
+            note,
+            priceId,
+            paymentId,
+            provinceId,
+            clinicId,
+            specialtyId,
+        } = Doctor_Info;
         if (
             res &&
-            res.status === 200 &&
-            res.data.data.Markdown.description &&
-            res.data.data.Markdown.contentMarkdown
+            res.data.errorCode === 0 &&
+            Markdown.description &&
+            Markdown.contentMarkdown &&
+            selectedPrice &&
+            selectedPayment &&
+            selectedProvince &&
+            nameClinic &&
+            addressClinic &&
+            note &&
+            specialtyId
         ) {
             setDescriptionDoctor(Markdown.description);
             setContentMarkdown(Markdown.contentMarkdown);
+            setForm({
+                selectedPrice: {
+                    value: priceId,
+                    label: language === 'vi' ? priceIdData.valueVi : priceIdData.valueEn,
+                },
+                selectedPayment: {
+                    value: paymentId,
+                    label: language === 'vi' ? paymentIdData.valueVi : paymentIdData.valueEn,
+                },
+                selectedProvince: {
+                    value: provinceId,
+                    label: language === 'vi' ? provinceIdData.valueVi : provinceIdData.valueEn,
+                },
+                nameClinic: nameClinic,
+                addressClinic: addressClinic,
+                note: note,
+                // clinicId: clinicId,
+                selectedSpecialty: specialtyId.label,
+            });
             setIsData(true);
         } else {
-            setDescriptionDoctor('');
-            setContentMarkdown('');
             setIsData(false);
         }
-    };
-
-    const handleChangePrice = (e) => {
-        setSelectedPrice(e);
-        console.log('check change price: ', e);
     };
 
     const handleOnChangeDesc = (e) => {
@@ -132,8 +230,21 @@ function ManageDoctor(props) {
                     type === 'USER' ? `${item.lastName} ${item.firstName}` : `${item.valueVi}`;
                 let labelEn =
                     type === 'USER' ? `${item.firstName} ${item.lastName}` : `${item.valueEn}`;
-                let value = type === 'USER' ? item.id : item.keyMap;
+                let label;
+                let value;
+                if (type === 'USER') {
+                    value = item.id ? item.id : '';
+                } else if (type === 'SPECIALTY') {
+                    value = item.id ? item.id : '';
+                    label = item.name ? item.name : '';
+                } else {
+                    value = item.keyMap ? item.keyMap : '';
+                }
                 obj.label = language === 'vi' ? labelVi : labelEn;
+                if (type === 'SPECIALTY') {
+                    obj.label = label;
+                }
+
                 obj.value = value;
                 res.push(obj);
             });
@@ -152,7 +263,7 @@ function ManageDoctor(props) {
                         <FormattedMessage id="admin.manage-doctor.choose-doctor" />
                     </label>
                     <Select
-                        value={selecteDoctor}
+                        value={selecteDoctor ? selecteDoctor : ''}
                         onChange={(e) => handleChangeSelectDoctor(e)}
                         options={allDoctorArr}
                         placeholder=""
@@ -165,7 +276,7 @@ function ManageDoctor(props) {
                     <textarea
                         className={cx('form-control')}
                         rows="2"
-                        value={descriptionDoctor}
+                        value={descriptionDoctor ? descriptionDoctor : ''}
                         onChange={(e) => handleOnChangeDesc(e)}
                     ></textarea>
                 </div>
@@ -173,43 +284,95 @@ function ManageDoctor(props) {
 
             <div className={cx('more-info-extra row mb-3')}>
                 <div className={cx('col-4 form-group')}>
-                    <label>Chọn giá</label>
+                    <label>
+                        <FormattedMessage id="admin.manage-doctor.price" />
+                    </label>
                     <Select
-                        // value={selectedPrice}
-                        // onChange={(e) => handleChangePrice(e)}
+                        value={selectedPrice ? selectedPrice : ''}
+                        onChange={(e) => handleOnChangeInput(e, 'selectedPrice')}
                         options={listPrice}
                         placeholder=""
+                        name="select price name"
                     />
                 </div>
                 <div className={cx('col-4 form-group')}>
-                    <label>Chọn tỉnh thành</label>
+                    <label>
+                        <FormattedMessage id="admin.manage-doctor.payment" />
+                    </label>
                     <Select
-                        // value={selectedPrice}
-                        // onChange={(e) => handleChangePrice(e)}
-                        options={listProvince}
-                        placeholder=""
-                    />
-                </div>
-                <div className={cx('col-4 form-group')}>
-                    <label>Chọn phương thức thanh toán</label>
-                    <Select
-                        // value={selectedPrice}
-                        // onChange={(e) => handleChangePrice(e)}
+                        value={selectedPayment ? selectedPayment : ''}
+                        onChange={(e) => handleOnChangeInput(e, 'selectedPayment')}
                         options={listPayment}
                         placeholder=""
                     />
                 </div>
                 <div className={cx('col-4 form-group')}>
-                    <label>Tên phòng khám</label>
-                    <input className={cx('form-control')} />
+                    <label>
+                        <FormattedMessage id="admin.manage-doctor.province" />
+                    </label>
+                    <Select
+                        value={selectedProvince ? selectedProvince : ''}
+                        onChange={(e) => handleOnChangeInput(e, 'selectedProvince')}
+                        options={listProvince}
+                        placeholder=""
+                    />
                 </div>
                 <div className={cx('col-4 form-group')}>
-                    <label>Địa chỉ phòng khám</label>
-                    <input className={cx('form-control')} />
+                    <label>
+                        <FormattedMessage id="admin.manage-doctor.clinic-name" />
+                    </label>
+                    <input
+                        name="nameClinic"
+                        className={cx('form-control')}
+                        value={nameClinic ? nameClinic : ''}
+                        onChange={(e) => handleOnChangeInput(e)}
+                    />
                 </div>
                 <div className={cx('col-4 form-group')}>
-                    <label>Note</label>
-                    <input className={cx('form-control')} />
+                    <label>
+                        <FormattedMessage id="admin.manage-doctor.clinic-address" />
+                    </label>
+                    <input
+                        name="addressClinic"
+                        className={cx('form-control')}
+                        value={addressClinic ? addressClinic : ''}
+                        onChange={(e) => handleOnChangeInput(e)}
+                    />
+                </div>
+                <div className={cx('col-4 form-group')}>
+                    <label>
+                        <FormattedMessage id="admin.manage-doctor.note" />
+                    </label>
+                    <input
+                        name="note"
+                        className={cx('form-control')}
+                        value={note ? note : ''}
+                        onChange={(e) => handleOnChangeInput(e)}
+                    />
+                </div>
+                <div className={cx('col-4 form-group')}>
+                    <label>
+                        Chọn chuyên khoa
+                        {/* <FormattedMessage id="admin.manage-doctor.note" /> */}
+                    </label>
+                    <Select
+                        value={selectedSpecialty ? selectedSpecialty : ''}
+                        onChange={(e) => handleOnChangeInput(e, 'specialtyId')}
+                        options={listSpecialty}
+                        placeholder=""
+                    />
+                </div>
+                <div className={cx('col-4 form-group')}>
+                    <label>
+                        Chọn phòng khám
+                        {/* <FormattedMessage id="admin.manage-doctor.note" /> */}
+                    </label>
+                    {/* <input
+                        name="clinicId"
+                        className={cx('form-control')}
+                        value={clinicId ? clinicId : ''}
+                        onChange={(e) => handleOnChangeInput(e)}
+                    /> */}
                 </div>
             </div>
 

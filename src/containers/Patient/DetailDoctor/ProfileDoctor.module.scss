@@ -1,0 +1,56 @@
+.profile-container {
+}
+
+.profile-content {
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.info-avatar {
+    border-radius: 50%;
+    height: 100px;
+    margin: 20px;
+}
+
+.info-detail {
+}
+
+.info-detail-title {
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.info-detail-position {
+    text-decoration: none;
+    font-size: 17px;
+    color: #337ab7;
+    margin: 0;
+    font-weight: 600;
+}
+
+.info-detail-description {
+    text-align: justify;
+    margin: 0;
+}
+
+.info-detail-schedule {
+    color: #ffc10e;
+    margin: 0;
+}
+
+.info-detail-province {
+    margin: 0;
+}
+
+.location-icon {
+    margin-right: 10px;
+    color: red;
+}
+
+.profile-price {
+    margin: 0 0 10px 20px;
+}

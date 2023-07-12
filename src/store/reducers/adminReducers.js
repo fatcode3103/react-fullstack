@@ -12,6 +12,8 @@ const initialState = {
     hoursAllCode: [],
     scheduleDoctor: [],
     allRequiredDoctorInfo: [],
+    extraInfoDoctor: {},
+    allSpecialty: [],
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -157,8 +159,10 @@ const adminReducer = (state = initialState, action) => {
             };
         case actionTypes.FETCH_ALLCODE_SCHEDULE_HOURS_FAILED:
             state.isLoading = false;
+            let coppyHoursAllCode = { ...state };
+            coppyHoursAllCode.hoursAllCode = [];
             return {
-                ...state,
+                ...coppyHoursAllCode,
             };
         //get schedule doctor
         case actionTypes.FETCH_SCHEDULE_DOCTOR_START:
@@ -174,9 +178,11 @@ const adminReducer = (state = initialState, action) => {
                 ...coppyScheduleDoctorState,
             };
         case actionTypes.FETCH_SCHEDULE_DOCTOR_FAILED:
+            let coppyScheduleDoctor = { ...state };
             state.isLoading = false;
+            coppyScheduleDoctor.scheduleDoctor = [];
             return {
-                ...state,
+                ...coppyScheduleDoctor,
             };
         //get required doctor info
         case actionTypes.FETCH_REQUIRED_DOCTOR_INFO_START:
@@ -193,8 +199,51 @@ const adminReducer = (state = initialState, action) => {
             };
         case actionTypes.FETCH_REQUIRED_DOCTOR_INFO_FAILED:
             state.isLoading = false;
+            let coppyAllRequiredDoctorInfo = { ...state };
+            coppyAllRequiredDoctorInfo.allRequiredDoctorInfo = [];
+            return {
+                ...coppyAllRequiredDoctorInfo,
+            };
+        //get extra info doctor by id
+        case actionTypes.GET_EXTRA_INFO_BY_ID_START:
+            state.isLoading = true;
             return {
                 ...state,
+            };
+        case actionTypes.GET_EXTRA_INFO_BY_ID_SUCCESS:
+            let coppyExtraInfoDoctorState = { ...state };
+            coppyExtraInfoDoctorState.isLoading = false;
+            coppyExtraInfoDoctorState.extraInfoDoctor = action.payload;
+            return {
+                ...coppyExtraInfoDoctorState,
+            };
+        case actionTypes.GET_EXTRA_INFO_BY_ID_FAILED:
+            state.isLoading = false;
+            let coppyExtraInfoDoctor = { ...state };
+            coppyExtraInfoDoctor.extraInfoDoctor = {};
+            return {
+                ...coppyExtraInfoDoctor,
+            };
+        //get all specialty
+        case actionTypes.GET_ALL_SPECIALTY_START:
+            state.isLoading = true;
+            return {
+                ...state,
+            };
+        case actionTypes.GET_ALL_SPECIALTY_SUCCESS:
+            let coppyAllSpecialtyState = { ...state };
+            coppyAllSpecialtyState.isLoading = false;
+            coppyAllSpecialtyState.allSpecialty = action.payload;
+            console.log('check action: >>>', action.payload);
+            return {
+                ...coppyAllSpecialtyState,
+            };
+        case actionTypes.GET_ALL_SPECIALTY_FAILED:
+            state.isLoading = false;
+            let coppyAllSpecialty = { ...state };
+            coppyAllSpecialty.allSpecialty = {};
+            return {
+                ...coppyAllSpecialty,
             };
         default:
             return state;

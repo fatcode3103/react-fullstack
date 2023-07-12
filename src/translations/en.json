@@ -85,9 +85,27 @@
         "save": "Save information"
     },
     "patient": {
-        "detaile-doctor": {
+        "detail-doctor": {
             "schedule": "Schedule",
-            "no-schedule": "No appointment scheduled"
+            "no-schedule": "No appointment scheduled",
+            "address-clinic": "Clinic address",
+            "price-clinic": "Examination price",
+            "hide-details": "Hide details",
+            "view-details": "View details",
+            "note": "Note",
+            "payment-note": "The clinic has payment in the form of",
+            "choose-date": "Choose your appointment",
+            "book": "Book an appointment"
+        },
+        "booking": {
+            "appointment-notice": "Appointment Notice",
+            "full-name": "Full Name",
+            "phone-number": "Phone Number",
+            "date-of-birth": "Date of birth",
+            "email-address": "Email",
+            "address": "Address",
+            "gender": "Gender",
+            "reason": "Medical examination reason"
         }
     },
     "admin": {
@@ -96,7 +114,13 @@
             "choose-doctor": "Select doctor",
             "introductory-information": "Introductory information",
             "update-info": "Update",
-            "save-info": "Save"
+            "save-info": "Save",
+            "price": "Price",
+            "payment": "Payment",
+            "province": "Province",
+            "clinic-name": "Clinic name",
+            "clinic-address": "Clinic address",
+            "note": "Note"
         }
     }
 }

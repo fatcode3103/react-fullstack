@@ -6,14 +6,23 @@ import * as actions from '../../../store/actions';
 import localization from 'moment/locale/vi';
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCalendarDays } from '@fortawesome/free-solid-svg-icons';
+import {
+    faArrowAltCircleDown,
+    faArrowAltCircleUp,
+    faArrowCircleUp,
+    faArrowUp,
+    faCalendarDays,
+    faHand,
+} from '@fortawesome/free-solid-svg-icons';
 import { FormattedMessage } from 'react-intl';
+import BookingModal from './Modal/BookingModal';
 
 const cx = classNames.bind(styles);
 
 function DoctorSchedule(props) {
     const [allDates, setAllDates] = useState([]);
-    const [scheduleDoctorArr, setScheduleDoctorArr] = useState([]);
+    const [isShowModal, setIsShowModal] = useState(false);
+    const [dataScheduleTimeFromParent, setDataScheduleTimeFromParent] = useState({});
 
     const { app: appState, admin: adminState } = useSelector((state) => state);
     const dispatch = useDispatch();
@@ -49,59 +58,79 @@ function DoctorSchedule(props) {
         fetchScheduleDoctor();
     }, [language]);
 
-    useEffect(() => {
-        setScheduleDoctorArr(scheduleDoctor);
-    }, [scheduleDoctor]);
-
     const handleChangeSelectDate = async (e) => {
         await dispatch(actions.fetchScheduleDoctorStart(detailDoctor.id, e.target.value));
     };
 
+    const handleClickTimeBtn = (time) => {
+        setDataScheduleTimeFromParent(time);
+        setIsShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setIsShowModal(false);
+    };
+
     return (
-        <div className={cx('doctor-schedule-container')}>
-            <div className={cx('select')}>
-                <select
-                    onChange={(e) => handleChangeSelectDate(e)}
-                    className={cx('schedule-select')}
-                >
-                    <option selected>---</option>
-                    {allDates &&
-                        allDates.length > 0 &&
-                        allDates.map((item, index) => {
+        <>
+            <div className={cx('doctor-schedule-container')}>
+                <div className={cx('select')}>
+                    <select
+                        onChange={(e) => handleChangeSelectDate(e)}
+                        className={cx('schedule-select')}
+                    >
+                        <option selected>dd/mm</option>
+                        {allDates &&
+                            allDates.length > 0 &&
+                            allDates.map((item, index) => {
+                                return (
+                                    <option
+                                        value={item.value}
+                                        key={index}
+                                        className={cx('schedule-option')}
+                                    >
+                                        {item.label}
+                                    </option>
+                                );
+                            })}
+                    </select>
+                </div>
+                <div className={cx('schedule-title')}>
+                    <FontAwesomeIcon icon={faCalendarDays} className={cx('schedule-icon')} />
+                    <span className={cx('schedule-text')}>
+                        <FormattedMessage id="patient.detail-doctor.schedule" />
+                    </span>
+                </div>
+                <div className={cx('schedule')}>
+                    {scheduleDoctor &&
+                    scheduleDoctor.length > 0 &&
+                    scheduleDoctor[0].doctorId === detailDoctor.id ? (
+                        scheduleDoctor.map((item, index) => {
+                            const { valueVi: timeVi, valueEn: timeEn } = item.timeData;
+                            const time = language === 'vi' ? timeVi : timeEn;
                             return (
-                                <option
-                                    value={item.value}
+                                <button
+                                    className={cx('time-btn')}
                                     key={index}
-                                    className={cx('schedule-option')}
+                                    onClick={() => handleClickTimeBtn(item)}
                                 >
-                                    {item.label}
-                                </option>
+                                    {time}
+                                </button>
                             );
-                        })}
-                </select>
+                        })
+                    ) : (
+                        <span>
+                            <FormattedMessage id="patient.detail-doctor.choose-date" />
+                        </span>
+                    )}
+                </div>
             </div>
-            <div className={cx('schedule-title')}>
-                <FontAwesomeIcon icon={faCalendarDays} className={cx('schedule-icon')} />
-                <span className={cx('schedule-text')}>
-                    {<FormattedMessage id="patient.detaile-doctor.schedule" />}
-                </span>
-            </div>
-            <div className={cx('schedule')}>
-                {scheduleDoctorArr && scheduleDoctorArr.length > 0 ? (
-                    scheduleDoctorArr.map((item, index) => {
-                        const { valueVi: timeVi, valueEn: timeEn } = item.timeData;
-                        const time = language === 'vi' ? timeVi : timeEn;
-                        return (
-                            <button className={cx('time-btn')} key={index}>
-                                {time}
-                            </button>
-                        );
-                    })
-                ) : (
-                    <FormattedMessage id="patient.detaile-doctor.no-schedule" />
-                )}
-            </div>
-        </div>
+            <BookingModal
+                isOpen={isShowModal}
+                handleCloseModal={handleCloseModal}
+                dataScheduleTimeFromParent={dataScheduleTimeFromParent}
+            />
+        </>
     );
 }
 

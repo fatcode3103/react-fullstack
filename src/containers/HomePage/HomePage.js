@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 
 import HomePageHeader from './HomePageHeader';
 import DoctorSection from './DoctorSection/DoctorSection';
+import Specialty from './Specialty/Specialty';
 import Section from './Section/Section';
 import HandlBook from './HandlBook/HandlBook';
 import About from './About/About';
@@ -18,7 +19,7 @@ const HomePage = () => {
     return (
         <div>
             <HomePageHeader isShowBanner={true} />
-            <Section data={specialityData} />
+            <Specialty />
             <Section data={telemedicineData} backgroundStyle="#f5f5f5" />
             <Section data={healthFacilities} />
             <DoctorSection data={outstandingDoctor} backgroundStyle="#f5f5f5" />

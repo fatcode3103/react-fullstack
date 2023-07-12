@@ -1,0 +1,151 @@
+.booking-modal-container {
+}
+
+.booking-modal-content {
+    display: flex;
+    flex-direction: column;
+    // overflow-y: scroll;
+}
+
+.booking-modal-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    align-items: center;
+    padding: 10px;
+}
+
+.header-text {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.close-icon {
+    font-size: 20px;
+    color: #858484;
+    transition: all 0.2s ease;
+
+    &:hover {
+        cursor: pointer;
+        color: #333;
+    }
+}
+
+.booking-modal-body {
+    height: 400px;
+    overflow-y: scroll;
+    padding-bottom: 26px;
+}
+
+/* width */
+.booking-modal-body::-webkit-scrollbar {
+    width: 3px;
+}
+
+/* Track */
+.booking-modal-body::-webkit-scrollbar-track {
+    background: #dddddd;
+}
+
+/* Handle */
+.booking-modal-body::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+.booking-modal-body::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.doctor-info {
+    padding: 20px 20px 10px 10px;
+}
+
+.price {
+    padding: 0 10px;
+}
+
+.booking-form {
+    padding: 0 30px;
+}
+
+.booking-modal-footer {
+    border-top: 1px solid #ccc;
+    padding: 10px;
+}
+
+.btn-booking-modal {
+    display: flex;
+    float: right;
+}
+
+.btn-confirm {
+    border: none;
+    border-radius: 3px;
+    margin-right: 12px;
+    background-color: rgb(58, 130, 255);
+    color: #fff;
+    padding: 6px 20px;
+    transition: all 0.2s ease;
+
+    &:hover {
+        cursor: pointer;
+        opacity: 0.9;
+        box-shadow: 0px 0px 5px #888888;
+    }
+
+    &:active {
+        cursor: pointer;
+        opacity: 1;
+        box-shadow: none;
+    }
+}
+
+.btn-cancel {
+    border-color: rgb(58, 130, 255);
+    border-style: solid;
+    border-radius: 3px;
+    margin-right: 12px;
+    background-color: #fff;
+    color: rgb(58, 130, 255);
+    padding: 6px 20px;
+    transition: all 0.2s ease;
+
+    &:hover {
+        cursor: pointer;
+        background-color: rgb(58, 130, 255);
+        color: #fff;
+        border-color: transparent;
+    }
+}
+
+///loading
+.loader {
+    border: 16px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

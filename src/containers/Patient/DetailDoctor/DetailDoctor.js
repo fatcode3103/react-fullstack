@@ -6,6 +6,7 @@ import HomePageHeader from '../../HomePage/HomePageHeader';
 import { useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../../store/actions';
 import DoctorSchedule from './DoctorSchedule';
+import DoctorExtraInfo from './DoctorExtraInfo';
 
 const cx = classNames.bind(styles);
 
@@ -25,7 +26,7 @@ function DetailDoctor(props) {
 
     if (detailOneDoctor && detailOneDoctor.positionData) {
         nameVi = `${detailOneDoctor.positionData.valueVi} ${detailOneDoctor.lastName} ${detailOneDoctor.firstName}`;
-        nameEn = `${detailOneDoctor.positionData.valueEn} ${detailOneDoctor.firstName}${detailOneDoctor.lastName}`;
+        nameEn = `${detailOneDoctor.positionData.valueEn} ${detailOneDoctor.firstName} ${detailOneDoctor.lastName}`;
     }
 
     useEffect(() => {
@@ -45,11 +46,11 @@ function DetailDoctor(props) {
                         <div className={cx('info-doctor')}>
                             <div className={cx('avatar-doctor')}>
                                 <img
-                                    src={`${
+                                    src={
                                         detailOneDoctor && detailOneDoctor.image
                                             ? detailOneDoctor.image
                                             : ''
-                                    }`}
+                                    }
                                     alt="Doctor Avatar"
                                 />
                             </div>
@@ -73,7 +74,9 @@ function DetailDoctor(props) {
                             >
                                 <DoctorSchedule />
                             </div>
-                            <div className={cx('content-right col-5')}>Content right</div>
+                            <div className={cx('content-right col-5')}>
+                                <DoctorExtraInfo doctorIdFromParent={detailDoctor.id} />
+                            </div>
                         </div>
                     </div>
                     <div className={cx('detail-info-doctor')}>
